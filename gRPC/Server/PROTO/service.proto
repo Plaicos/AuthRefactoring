@@ -1,0 +1,14 @@
+syntax = "proto3";
+package AuthPackage;
+
+service Auth {
+    rpc CreateCredential(createCredentialMsg) returns (statusResponse);
+}
+
+message createCredentialMsg {
+    string user = 1;
+}
+
+message statusResponse {
+    string status = 1;
+}

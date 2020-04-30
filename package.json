@@ -1,0 +1,16 @@
+{
+  "name": "auth-refactoring",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RPJCODING",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.4",
+    "dependency-manager.js": "^0.1.0",
+    "grpc": "^1.24.2"
+  }
+}
