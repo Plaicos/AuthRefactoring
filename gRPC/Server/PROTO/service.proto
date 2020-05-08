@@ -3,12 +3,45 @@ package AuthPackage;
 
 service Auth {
     rpc CreateCredential(createCredentialMsg) returns (statusResponse);
+    rpc GetCredential(getCredentialMsg)returns (statusResponse);
+    //rpc GenerateToken()returns();
+    rpc AuthenticateToken(tokenAuthenticationRequest) returns (credential);
+}
+
+message credential {
+    string User = 1;
+    int32 AccessLevel = 2;
+    privileges privileges = 3;
+}
+
+message privileges {
+    dataAccessPrivilege SelfData = 1;
+    dataAccessPrivilege ThirdPartyData = 2;
+}
+
+message dataAccessPrivilege {
+    bool Read = 1;
+    bool Write = 2;
+    bool Delete = 3;
+    bool Ovveride = 4;
 }
 
 message createCredentialMsg {
     string user = 1;
+    bool isUser = 2;
+    bool isStaff = 3;
+    bool isMaintainer = 4;
+    bool isAdmin = 5;
 }
 
 message statusResponse {
     string status = 1;
+}
+
+message getCredentialMsg {
+    string user = 1;
+}
+
+message tokenAuthenticationRequest {
+    string token = 1;
 }

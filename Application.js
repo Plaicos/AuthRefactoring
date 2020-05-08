@@ -15,6 +15,7 @@ module.exports = class Application {
             await this.InitializeDependenciesAsync();
             this.Adapters = require("./App/Adapters/adapters");
             this.UseCases = require("./App/UseCases/UseCases");
+            this.ConfigureDatabaseAdapter();
         }
         catch (erro) {
             throw erro;
@@ -30,6 +31,16 @@ module.exports = class Application {
             }
             this.Dependencies = await DependencyManager.InitializeAndExportAsync();
             return
+        }
+        catch (erro) {
+            throw erro;
+        }
+    }
+
+    static ConfigureDatabaseAdapter() {
+        try {
+            Application.Dependencies.DAO.SetDatabase(Application.Dependencies.Database);
+            return;
         }
         catch (erro) {
             throw erro;
