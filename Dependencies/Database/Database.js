@@ -1,8 +1,9 @@
 var Dependency = require("dependency-manager.js").Models.Dependency;
 var Mongo = require("mongodb")
 
-module.exports = class Database extends IIDependency {
-    static HasBeenInitialized = false;
+module.exports = class Database extends Dependency {
+    static Name = "Database";
+    static HasBeenInitialized = true;
     static AsyncInitMustBeCalled = true
     static Config = require("./config")
     static ConnectionString = `mongodb+srv://Admin:${this.Config.Password}@cluster0-x9l6p.gcp.mongodb.net/test?retryWrites=true&w=majority`
@@ -40,6 +41,7 @@ module.exports = class Database extends IIDependency {
         if (!Database.HasBeenInitialized) {
             throw Error("Cant build Database instance without initializing first");
         }
+        super();
         this.Connection = Database.Connection;
         this.ObjectId = Mongo.ObjectId;
         return;

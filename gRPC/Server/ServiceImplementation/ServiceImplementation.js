@@ -8,6 +8,6 @@ module.exports = class gRPCServcieImplementation {
     }
 
     async AuthenticateToken() {
-        await Controller
+        //await Controller
     }
 }

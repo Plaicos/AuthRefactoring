@@ -6,13 +6,14 @@ module.exports = class Controller {
         try {
             let request = App.Adapters.GrpcRequest.ToNewCredential(call);
             await UseCaseOperator.CreataNewCredential(request);
+            callback(null, { status: "ok" })
         }
         catch (erro) {
             this.HandleError(callback, erro);
         }
     }
 
-    static AuthenticateToken(call, callback) {
+    static async AuthenticateToken(call, callback) {
         try {
             let request = App.Adapters.GrpcRequest
             await UseCaseOperator.AuthenticateTokenAndGetCredential();
