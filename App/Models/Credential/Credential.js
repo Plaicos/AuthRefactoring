@@ -1,43 +1,24 @@
-var Priviligies = require("../Priviligies/Priviligies");
+var Privileges = require("../Privileges/Privileges");
 
 module.exports = class Credential {
     static DefaultAccessLevel = 5;
-
-    static MakeUser(credential) {
-        try {
-            credential.AccessLevel = 4;
-            credential.Privilegies = Priviligies.Default();
-            return credential;
-        }
-        catch (erro) {
-            throw erro;
-        }
-    }
-
-    static MakeAdmin(credential) {
-        try {
-            credential.AccessLevel = 1;
-            credential.Privilegies = Priviligies.Admin();
-            return credential;
-        }
-        catch (erro) {
-            throw erro;
-        }
-    }
-
+    
     User;
     AccessLevel;
-    Privilegies;
+    Privileges;
 
     constructor({ credential, user }) {
+        if(!user){
+            user = "";
+        }
         if (!credential || !(credential instanceof Credential)) {
             this.User = user;
             this.AccessLevel = Credential.DefaultAccessLevel;
-            this.Privilegies = Priviligies.Default();
+            this.Privileges = Privileges.Default();
         }
         else {
             this.User = credential.User;
-            this.Privilegies = credential.Privilegies;
+            this.Privileges = credential.Privileges;
             this.AccessLevel = credential.AccessLevel;
         }
         return;

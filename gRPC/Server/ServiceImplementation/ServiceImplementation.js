@@ -7,7 +7,15 @@ module.exports = class gRPCServcieImplementation {
         await Controller.CreateCredential(call, callback);
     }
 
-    async AuthenticateToken() {
-        //await Controller
+    async GenerateAuthenticationToken(call, callback){
+        await Controller.GenerateAuthenticationToken(call, callback);
+    }
+
+    async AuthenticateToken(call, callback){
+        await Controller.AuthenticateToken(call, callback);
+    }
+
+    async AuthorizeCredential(call, callback){
+        await Controller.AuthorizeCredential(call, callback);
     }
 }

@@ -4,26 +4,28 @@ package AuthPackage;
 service Auth {
     rpc CreateCredential(createCredentialMsg) returns (statusResponse);
     rpc GetCredential(getCredentialMsg)returns (statusResponse);
-    //rpc GenerateToken()returns();
+    rpc GenerateAuthenticationToken(generateTokenRequest)returns(tokenGeneratedResponse);
     rpc AuthenticateToken(tokenAuthenticationRequest) returns (credential);
+    rpc AuthorizeCredential (authorizeRequest) returns (statusResponse);
 }
 
 message credential {
     string User = 1;
     int32 AccessLevel = 2;
-    privileges privileges = 3;
+    privileges Privileges = 3;
 }
 
 message privileges {
     dataAccessPrivilege SelfData = 1;
     dataAccessPrivilege ThirdPartyData = 2;
+    bool IsAdmin = 3;
 }
 
 message dataAccessPrivilege {
     bool Read = 1;
     bool Write = 2;
     bool Delete = 3;
-    bool Ovveride = 4;
+    bool Override = 4;
 }
 
 message createCredentialMsg {
@@ -44,4 +46,19 @@ message getCredentialMsg {
 
 message tokenAuthenticationRequest {
     string token = 1;
+}
+
+message generateTokenRequest {
+    string user = 1;
+}
+
+message tokenGeneratedResponse {
+    string status = 1;
+    string token = 2;
+}
+
+message authorizeRequest {
+    credential credential = 1;
+    string profile = 2;
+    credential manualConfig = 3;
 }

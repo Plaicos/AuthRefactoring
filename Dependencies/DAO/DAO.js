@@ -10,7 +10,7 @@ module.exports = class DAO extends Dependency {
     ObjectId;
     Collections;
 
-    constructor(){
+    constructor() {
         super();
     }
 
@@ -19,7 +19,7 @@ module.exports = class DAO extends Dependency {
         this.Db = db.Connection;
         this.ObjectId = db.ObjectId
         this.Collections = {
-            Credentials: this.Db.Collections("Credentials")
+            Credentials: this.Db.collection("Credentials")
         }
     }
 
@@ -31,6 +31,68 @@ module.exports = class DAO extends Dependency {
         catch (erro) {
             throw erro;
         }
+    }
+
+    async GetCredential(user) {
+        try {
+            return new Promise((resolve, reject) => {
+                this.Collections.Credentials.find({ User: user }).toArray((erro, arr) => {
+                    if (erro) {
+                        return reject(erro);
+                    }
+                    if (arr.length === 0) {
+                        return reject(Error(`Credential for username '${user}' does not exist`));
+                    }
+                    else {
+                        return resolve(arr[0]);
+                    }
+                });
+            });
+        }
+        catch (erro) {
+            throw erro;
+        }
+    }
+
+    async UpdateCredential(credential) {
+        try {
+            await this.Collections.Credentials.updateOne({ User: credential.User }, credential);
+            return;
+        }
+        catch (erro) {
+            throw erro;
+        }
+    }
+
+    async DeleteCredential(user) {
+        try {
+            await this.Collections.Credentials.remove({ User: user });
+            return;
+        }
+        catch (erro) {
+            throw erro;
+        }
+    }
+
+    CheckIfCredentialExist(user) {
+        return new Promise((resolve, reject) => {
+            try {
+                this.Collections.Credentials.find({ User: user }).toArray((erro, arr) => {
+                    if (erro) {
+                        throw erro;
+                    }
+                    if (arr.length > 0) {
+                        resolve(true);
+                    }
+                    else {
+                        resolve(false);
+                    }
+                });
+            }
+            catch (erro) {
+                reject(erro);
+            }
+        });
     }
 
 }

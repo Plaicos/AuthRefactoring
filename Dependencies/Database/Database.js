@@ -4,7 +4,7 @@ var Mongo = require("mongodb")
 module.exports = class Database extends Dependency {
     static Name = "Database";
     static HasBeenInitialized = true;
-    static AsyncInitMustBeCalled = true
+    static InitializeAsyncMustBeCalled = true;
     static Config = require("./config")
     static ConnectionString = `mongodb+srv://Admin:${this.Config.Password}@cluster0-x9l6p.gcp.mongodb.net/test?retryWrites=true&w=majority`
     static Connection;

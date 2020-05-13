@@ -1,6 +1,7 @@
 module.exports = {
     Credential: require("./Credential/Credential"),
-    Priviligies: require("./Priviligies/Priviligies"),
+    Privileges: require("./Privileges/Privileges"),
     NewCredential: require("./NewCredential/NewCredentialModel"),
-    request: require("./Request/requestModels")
+    request: require("./Request/requestModels"),
+    AuthorizeRequest: require("./AutorizeRequest/AuthorizeRequest")
 }

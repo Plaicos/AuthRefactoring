@@ -3,7 +3,8 @@ var DependencyManager = new (require("dependency-manager.js"))();
 module.exports = class Application {
     static RootPath = __dirname;
     static Errors;
-    static Models = require("./App/Models/Models")
+    static Models = require("./App/Models/Models");
+    static Entities;
     static Presenters
     static Events;
     static Dependencies;
@@ -13,6 +14,7 @@ module.exports = class Application {
     static async InitializeAsync() {
         try {
             await this.InitializeDependenciesAsync();
+            this.Entities = require("./App/Entities/Entities");
             this.Adapters = require("./App/Adapters/adapters");
             this.UseCases = require("./App/UseCases/UseCases");
             this.ConfigureDatabaseAdapter();
