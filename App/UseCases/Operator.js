@@ -24,7 +24,7 @@ module.exports = class UseCaseOperator {
 
     static async AuthorizeCredential(authorizeRequest){
         try{
-            let credential = authorizeRequest.Credential;
+            let credential = await App.UseCases.GetCredential(authorizeRequest.User);
             let profile = authorizeRequest.Profile;
             return await App.UseCases.AuthorizeCredential(credential, profile);
         }

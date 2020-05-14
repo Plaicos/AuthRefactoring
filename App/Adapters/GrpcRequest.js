@@ -40,7 +40,7 @@ module.exports = class GrpcRequestAdapter {
         try {
             let requestData = grpcRequest.request;
             let request = new App.Models.AuthorizeRequest();
-            request.Credential = requestData.credential;
+            request.User = requestData.user;
             request.Profile = requestData.profile;
             return request;
         } 

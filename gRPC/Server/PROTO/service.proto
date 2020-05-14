@@ -3,7 +3,6 @@ package AuthPackage;
 
 service Auth {
     rpc CreateCredential(createCredentialMsg) returns (statusResponse);
-    rpc GetCredential(getCredentialMsg)returns (statusResponse);
     rpc GenerateAuthenticationToken(generateTokenRequest)returns(tokenGeneratedResponse);
     rpc AuthenticateToken(tokenAuthenticationRequest) returns (credential);
     rpc AuthorizeCredential (authorizeRequest) returns (statusResponse);
@@ -58,7 +57,7 @@ message tokenGeneratedResponse {
 }
 
 message authorizeRequest {
-    credential credential = 1;
+    string user = 1;
     string profile = 2;
     credential manualConfig = 3;
 }
