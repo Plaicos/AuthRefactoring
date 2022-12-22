@@ -12,7 +12,7 @@
     "@grpc/proto-loader": "^0.5.4",
     "dependency-manager.js": "^0.1.0",
     "grpc": "^1.24.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^3.5.7"
   }
 }
